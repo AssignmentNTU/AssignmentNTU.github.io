@@ -1,33 +1,70 @@
-package Cineplex;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+package Interface;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import Cinema.Cinema;
-import Interface.Database;
+import Cineplex.Cineplex;
+import Cineplex.CineplexDatabase;
 import Movie.DateMovie;
+import Movie.HolidayDataBase;
 import Movie.Movie;
+import Movie.RatedMovie;
+import Movie.RatedMovieDatabase;
+import Staff.DatabaseStaff;
+import Staff.Staff;
+import User.CustomerDatabase;
 
-//Basically this class will make the database for Cineplex Class and read it 
-//configure the initial database value from the Main method
-
-public class CineplexDatabase implements Database{
-
-	private static Cineplex cathay;
-	private static Cineplex filmgarde;
-	private static Cineplex ShawTheatres;
+public class restartingAllDatabase {
 	
 	public static void main(String args[]){
-		StartCineplex();
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Start restart all database");
+		System.out.println("1) restart Cineplex Database");
+		System.out.println("2) restart Rated Movie Database");
+		System.out.println("3) restart Holiday Database");
+		System.out.println("4) restart customerDatabase");
+		System.out.println("5) restart staff Database");
+		System.out.println("6) restart all");
+		int opt = scan.nextInt();
+		switch(opt){
+			case 1:
+				restartCineplexDatabase();
+				break;
+			case 2:
+				restartRatedMovieDatabase();
+				break;
+			case 3:
+				restartHolidayDatabase();
+				break;
+			case 4:
+				restartCustomerDatabase();
+				break;
+			case 5:
+				restartStaffDatabase();
+				break;
+			case 6:
+				restartCineplexDatabase();
+				System.out.println("---------");
+				restartRatedMovieDatabase();
+				System.out.println("---------");
+				restartHolidayDatabase();
+				System.out.println("---------");
+				restartCustomerDatabase();
+				System.out.println("---------");
+				restartStaffDatabase();
+				break;
+			default:
+				System.out.println("your choice is invalid");
+		}
 	}
 	
-	private static void StartCineplex(){
+	public void witeDatabase(Database database,String fileName, ArrayList list){
+		database.writeToDatabase(fileName, list);
+	}
+	
+	
+	public static void restartCineplexDatabase(){
 		System.out.println("Start constructing database for Cineplex");
 		//Change code in here to configure the database 
 		//automatically configure 3 Cineplex from 1 company which is Cathat 
@@ -52,7 +89,7 @@ public class CineplexDatabase implements Database{
 		AMKHub.addCinema(amkHubSecond);
 		AMKHub.addCinema(amkHubThird);
 		
-		DateMovie walkDate = new DateMovie(amkHubFirst,"Not Showing",2015,12,10,12,20);
+		DateMovie walkDate = new DateMovie(amkHubFirst,"Now Showing",2015,12,10,12,20);
 		ArrayList<String> castList = new ArrayList<String>();
 		castList.add("Joseph Gordon-Levitt");
 		castList.add("Ben Kingsley");
@@ -200,110 +237,75 @@ public class CineplexDatabase implements Database{
 		
 		CineplexDatabase cDatabase =  new CineplexDatabase();
 		System.out.println("Finish Construct the original Database for Cineplex");
-		cDatabase.writeToDatabase("CineplexDatabase.dat", listCineplex);
-		CineplexDatabase cDatabase1 =  new CineplexDatabase();
-		ArrayList<Cineplex> listCineplex1 = cDatabase1.readFromDatabase("CineplexDatabase.dat");
-	
+		//cDatabase.writeToDatabase("CineplexDatabase.dat", listCineplex);
+		//CineplexDatabase cDatabase1 =  new CineplexDatabase();
+		//ArrayList<Cineplex> listCineplex1 = cDatabase1.readFromDatabase("CineplexDatabase.dat");
+		restartingAllDatabase all = new restartingAllDatabase();
+		all.witeDatabase(cDatabase,"CineplexDatabase.dat" , listCineplex);
 	}
 	
-	@Override
-	public void writeToDatabase(String filename, ArrayList list) {
-		FileOutputStream fos = null;
-		BufferedOutputStream bos = null;
-		try{
-			fos = new FileOutputStream(filename);
-			bos = new BufferedOutputStream(fos);
-			ObjectOutputStream os = new ObjectOutputStream(bos);
-			os.writeObject(list);
-			os.close();
-		}catch(IOException e){
-			System.out.println(e.getMessage());
-		}
-	}
-
-	@Override
-	public ArrayList<Cineplex> readFromDatabase(String filename) {
-		ArrayList returnedList = null;
-		FileInputStream fis = null;
-		BufferedInputStream bis = null;
-		try{
-			fis = new FileInputStream(filename);
-			bis = new BufferedInputStream(fis);
-			ObjectInputStream ois = new ObjectInputStream(bis);
-			returnedList = (ArrayList)ois.readObject();
-			ois.close();
-		}catch(IOException e){
-			
-		} catch (ClassNotFoundException e) {
-			
-		}
-		return returnedList;
+	public static void restartRatedMovieDatabase(){
+		System.out.println("Start Constructing the original database for Rated Movie");
+		RatedMovieDatabase database = new RatedMovieDatabase();
+		String fileName = "RatedMovie.dat";
+		ArrayList listMovie = new ArrayList<RatedMovie>();
+		//example for movie rating 
+		Movie first = new Movie("The walk");
+		//Movie second= new Movie("Last Witch Hunter");
+		//Movie third = new Movie("Paranormal Activity The Ghost Dimension");
+		//Movie fourth = new Movie("Goosebumps");
+		RatedMovie ratedmovie = new RatedMovie();
+		ratedmovie.addMovieList(first);
+		//ratedmovie.addMovieList(second);
+		//ratedmovie.addMovieList(third);
+		//ratedmovie.addMovieList(fourth);
+		listMovie.add(ratedmovie);
+		database.writeToDatabase(fileName, listMovie);
+		System.out.println("Finish construction the original database for Rated Movie");
+		restartingAllDatabase all = new restartingAllDatabase();
+		all.witeDatabase(database,fileName , listMovie);
 	}
 	
-
-	
-	/*
-	 * No need to see this
-	 * 
-	 * 
-	 public void ConfigureCineplexForStaff(){
-		Scanner scan = new Scanner(System.in);
-		int choiceCineplex =  0;
-		//we are using 3 cineplex from Singapore 
-		//Cathay Cineplex
-		//Filmgarde
-		//Century Cineplex
-		
-		System.out.println("\n Please Choose the cineplex to configure:");
-		System.out.println("1)Cathay Cineplex");
-		System.out.println("2)Filmgarde");
-		System.out.println("3)Century Cineplex");
-		choiceCineplex = scan.nextInt();
-		switch(choiceCineplex){
-		case 1:
-			System.out.println("Start Configuring Cathay Cineplex");
-			if(cathay != null) currentCineplex = cathay;
-			break;
-		case 2:
-			System.out.println("Start Configuring Filmgarde");
-			if(filmgarde != null) currentCineplex = filmgarde;
-			break;
-		case 3:
-			System.out.println("Start Configuring Century Cineplex");
-			if(century != null) currentCineplex = century;
-			
-			break;
-		default:try{
-			throw new ChoiceException("Please choose another cineplex");
-		}catch(ChoiceException e){
-		
-		}
-		}
-	}
-	public void ConfiguringCinema(){
-		System.out.println("Configuring cinema from "+this.nameCineplex);
-		for(int i = 1; i <= currentCineplex.listCinema.size() ; i++){
-			System.out.printf("%d) %s \n",i,listCinema.get(i-1).nameCinema);
-		}
-		System.out.println("please choose one Cinema to configure\n");
-		Scanner scan = new Scanner(System.in);
-		int indexCinema = scan.nextInt();
-		ConfiguringMovie(indexCinema-1);
-		
+	public static void restartHolidayDatabase(){
+		System.out.println("Start constructing the original database for holiday date");
+		HolidayDataBase holidayDatabase = new HolidayDataBase();
+		DateMovie holiday1 = new DateMovie(2012,10,10);
+		DateMovie holiday2 = new DateMovie(2014,10,10);
+		ArrayList dateList = new ArrayList<DateMovie>();
+		dateList.add(holiday1);
+		dateList.add(holiday2);
+		String fileName = "HolidayDatabase.dat";
+		holidayDatabase.writeToDatabase(fileName,dateList);
+		System.out.println("Finish constructing the original database for holiday date");
+		restartingAllDatabase all = new restartingAllDatabase();
+		all.witeDatabase(holidayDatabase,fileName , dateList);
 	}
 	
-	private void ConfiguringMovie(int pos){
-		currentCinema = listCinema.get(pos);
-		System.out.println("Configuring movie from "+currentCinema.nameCinema);
-		for(int i = 0 ; i < currentCinema.getArrayMovie().size() ; i++){
-			System.out.printf("%d) %s",i+1,currentCinema.getArrayMovie().get(i).nameMovie);
-		}
-		System.out.println("Please choose one Movie to configure");
-		Scanner scan = new Scanner(System.in);
-		int choiceMovie = scan.nextInt();
-		currentMovie = currentCinema.getArrayMovie().get(choiceMovie);
+	public static void restartCustomerDatabase(){
+		System.out.println("Start constructing database for customer");
+		CustomerDatabase customerDatabase = new CustomerDatabase();
+		String filename = "CustomerDatabase.dat";
+		ArrayList customerList = new ArrayList<>();
+		customerDatabase.writeToDatabase(filename,customerList);
+		System.out.println("Finish constructing database for Customer");
+		restartingAllDatabase all = new restartingAllDatabase();
+		all.witeDatabase(customerDatabase,filename,customerList);
 	}
-	*/
-
-
+	
+	
+	public static void restartStaffDatabase(){
+		System.out.println("Start constructing original database for User");
+		ArrayList list = new ArrayList<Staff>();
+		Staff newStaff = new Staff("EdwardSujono","12345");
+		Staff newStaff1 = new Staff("chee","asdf");
+		list.add(newStaff);
+		list.add(newStaff1);
+		String filename = "staff.dat";
+		DatabaseStaff dbs = new DatabaseStaff();
+		dbs.writeToDatabase(filename, list);
+		System.out.println("Finish constructing original database for User");
+		restartingAllDatabase all = new restartingAllDatabase();
+		all.witeDatabase(dbs,filename,list);
+	}
+	
 }

@@ -1,6 +1,5 @@
-package Staff;
+package Movie;
 
-import java.awt.List;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -12,21 +11,30 @@ import java.util.ArrayList;
 
 import Interface.Database;
 
-public class DatabaseStaff implements Database{
-	
+public class HolidayDataBase implements Database{
 	
 	public static void main(String args[]){
-		System.out.println("Start constructing original database for User");
-		ArrayList list = new ArrayList<Staff>();
-		Staff newStaff = new Staff("EdwardSujono","12345");
-		list.add(newStaff);
-		String filename = "staff.dat";
-		DatabaseStaff dbs = new DatabaseStaff();
-		dbs.writeToDatabase(filename, list);
-		System.out.println("Finish constructing original database for User");
+		System.out.println("Start constructing the original database for holiday date");
+		HolidayDataBase holidayDatabase = new HolidayDataBase();
+		DateMovie holiday1 = new DateMovie(2012,10,10);
+		DateMovie holiday2 = new DateMovie(2014,10,10);
+		ArrayList dateList = new ArrayList<DateMovie>();
+		dateList.add(holiday1);
+		dateList.add(holiday2);
+		String fileName = "HolidayDatabase.dat";
+		holidayDatabase.writeToDatabase(fileName,dateList);
+		System.out.println("Finish constructing the original database for holiday date");
+		//trying to retrieve data 
+		/*
+		ArrayList<DateMovie> list = holidayDatabase.readFromDatabase(fileName);
+		for(int i = 0 ; i < list.size() ; i++){
+			System.out.println(list.get(i).getYearMonthDay());
+		}
+		 */
 	}
 	
-
+	
+	
 	@Override
 	public void writeToDatabase(String filename, ArrayList<Object> list) {
 		FileOutputStream fos = null;
@@ -39,12 +47,12 @@ public class DatabaseStaff implements Database{
 			os.close();
 		}catch(IOException e){
 			System.out.println(e.getMessage());
-		}	
+		}
+		
 	}
 
-
 	@Override
-	public ArrayList<Staff> readFromDatabase(String filename) {
+	public ArrayList readFromDatabase(String filename) {
 		ArrayList returnedList = null;
 		FileInputStream fis = null;
 		BufferedInputStream bis = null;
@@ -61,5 +69,5 @@ public class DatabaseStaff implements Database{
 		}
 		return returnedList;
 	}
-	
+
 }

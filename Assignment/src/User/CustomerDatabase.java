@@ -1,6 +1,5 @@
-package Staff;
+package User;
 
-import java.awt.List;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -12,21 +11,17 @@ import java.util.ArrayList;
 
 import Interface.Database;
 
-public class DatabaseStaff implements Database{
-	
-	
-	public static void main(String args[]){
-		System.out.println("Start constructing original database for User");
-		ArrayList list = new ArrayList<Staff>();
-		Staff newStaff = new Staff("EdwardSujono","12345");
-		list.add(newStaff);
-		String filename = "staff.dat";
-		DatabaseStaff dbs = new DatabaseStaff();
-		dbs.writeToDatabase(filename, list);
-		System.out.println("Finish constructing original database for User");
+public class CustomerDatabase implements Database{
+
+	public static void main(String[] args){
+		System.out.println("Start constructing database for customer");
+		CustomerDatabase customerDatabase = new CustomerDatabase();
+		String filename = "CustomerDatabase.dat";
+		ArrayList customerList = new ArrayList<>();
+		customerDatabase.writeToDatabase(filename,customerList);
+		System.out.println("Finish constructing database for Customer");
 	}
 	
-
 	@Override
 	public void writeToDatabase(String filename, ArrayList<Object> list) {
 		FileOutputStream fos = null;
@@ -39,12 +34,11 @@ public class DatabaseStaff implements Database{
 			os.close();
 		}catch(IOException e){
 			System.out.println(e.getMessage());
-		}	
+		}
 	}
 
-
 	@Override
-	public ArrayList<Staff> readFromDatabase(String filename) {
+	public ArrayList readFromDatabase(String filename) {
 		ArrayList returnedList = null;
 		FileInputStream fis = null;
 		BufferedInputStream bis = null;
@@ -61,5 +55,5 @@ public class DatabaseStaff implements Database{
 		}
 		return returnedList;
 	}
-	
+
 }

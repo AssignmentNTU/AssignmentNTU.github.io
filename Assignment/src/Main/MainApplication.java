@@ -1,12 +1,19 @@
 package Main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import Cineplex.Cineplex;
+import Cineplex.CineplexDatabase;
 import Staff.StaffApplication;
 
 public class MainApplication {
 
 	public static void main(String args[]){
+		CineplexDatabase cDatabase1 =  new CineplexDatabase();
+		ArrayList<Cineplex> listCineplex1 = cDatabase1.readFromDatabase("CineplexDatabase.dat");
+	//	System.out.println("Size of Cineplex rating : "+listCineplex1.get(2).getMovieRatingList().size());
+		
 		int choiceLogin = 0;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Welcome To MOBLIMA\n");
