@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #ededed">
+<style type="text/css">
+#header{
+  position: fixed;
+  top:0;
+  background-color: #ff9900;
+  width: 100%;
+  height: 100px;
+  padding-top: 10px;
+  border-bottom: 2px solid #cbcbcb;
+ }
+
+ #InputForm{
+  max-width: 33%;
+  height: auto;
+  margin-top: 200px;
+  border-radius: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+ }
+
+ #loginButton{
+  max-width: 85%;
+ }
+
+ #usr{
+  display: block;
+  width: 85%;
+  height: 34px;
+  border:none;
+  border-color: transparent;
+  border-bottom: 2px solid #adadad;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+
+ }
+
+ }
+
+ .form-group{
+  max-width: 40%;
+ }
+</style>
+
+<div id="header" style="text-align:center">
+    <h1 style="color:white; font-family:calibri; font-style:italic; letter-spacing:1.5px">
+      Admin Login
+    </h1>
+</div>
+
+<center>
+<div id="InputForm" style="background-color: white">
+  <center>
+        <img src="image/LOGOMDK.png" alt="SIM Online" style="width:75px;; height:75px; margin-top:20px; margin-bottom:20px;">
+      </center>
+<form role="form">
+    <div class="form-group">
+      <input type="text" placeholder="Username" id="usr">
+      <input type="password" placeholder="Password" id="usr">
+    </div>
+  </form>
+  <a href="AdminHome.html">
+ <button class="btn btn-lg btn-primary btn-block" id="loginButton" onclick = login() style="font-family:calibri; letter-spacing:1.5px">
+  LOGIN
+</button>
+</a>
+</div>
+</center> 
+ 
+</body>
+</html>
