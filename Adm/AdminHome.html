@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<style type="text/css">
+#header{
+  position: fixed;
+  top:0;
+  background-color: #ff9900;
+  width: 100%;
+  height: 100px;
+  padding-top: 10px;
+  border-bottom: 2px solid #cbcbcb;
+ }
+
+ #loginButton{
+  max-width: 85%;
+ }
+
+ #pilihan{
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #ff9900;
+ }
+
+ #LogOut{
+  float: right;
+  margin-right: 20px;
+  margin-top: -15px;
+  color: white;
+  font-family: calibri;
+  letter-spacing: 1.5px;
+  font-style: italic;
+ }
+
+ #LogOut a{
+  color: #fff;
+  text-decoration: none;
+ }
+
+ .form-group{
+  max-width: 40%;
+ }
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+</style>
+
+<body style="background-color: #ededed">
+
+<div id="header" style="text-align:center">
+    <h1 style="color:white; font-family:calibri; font-style:italic; letter-spacing:1.5px">
+      Admin
+    </h1>
+    <h4 id="LogOut"><a href="index.html">Log Out</a></h4>
+</div>
+
+<table style="width:100%; margin-top:200px">
+  <td style="width:50%">
+    <a href="Question.php"> 
+    <div id="pilihan" style="margin-right:75px; float:right">
+      <center>
+        <img src="image/TambahSoal.png" alt="Kartu Kredit" style="width:60%; height:auto; margin-top:40px;">
+      </center>
+      <h2 style="font-family:calibri; letter-spacing:1.5px; text-align:center">Tambah Soal</h2>
+       
+    </div>
+    </a>
+   
+  </td>
+  <td style="width:50%">
+    <div id="pilihan" style="margin-left:75px; float:left">
+      <center>
+        <img src="image/EditSoal.png" alt="Kartu Kredit" style="width:70%; height:auto; margin-top:20px">
+      </center>
+      <h2 style="font-family:calibri; letter-spacing:1.5px; text-align:center">Edit Soal</h2>
+    </div>
+  </td>
+</table>
+ 
+</body>
+</html>
